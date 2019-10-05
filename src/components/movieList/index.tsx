@@ -16,24 +16,31 @@ export default class MovieList extends React.Component<any, any>{
     constructor(props: any) {
         super(props)
 
-        this.state = { searchField: "", movieList: [] }
+        this.state = { searchField: "", searchFieldChange: true, movieList: [] }
     }
 
-    componentDidMount() {
-        this.setState({ movieList: "" });
-        const { searched } = this.props
+    changeToTrue = (searched: string): void => {
+        this.setState({ searchFieldChange: true, searchField: searched, movieList: [] });
+    }
+
+    getApiResults = (searched: string): void => {
         axios.get(`http://www.omdbapi.com/?s=${searched}&type=movie&apikey=1fa83abf`)
-            .then(res => {
-                let movies = res.data;
-                this.setState({ movieList: movies.Search });
-            })
+        .then(res => {
+            let movies = res.data;
+            this.setState({ movieList: movies.Search, searchFieldChange: false });
+        })
     }
 
     render() {
-        const { movieList } = this.state
+        const { movieList, searchField, searchFieldChange } = this.state
+        const { searched } = this.props
+        if (searched !== searchField) this.changeToTrue(searched)
+        this.getApiResults(searched)
+        if (searchFieldChange) return (<div><SpinnerPage /></div>)
+        if (!movieList) return (<h1>NO Reasults</h1>)
         return (
             <div>
-                {!movieList ? <SpinnerPage /> : movieList.map((item: any) => <MovieCard key={item.Title} title={item.Title} pic={item.Poster} year={item.Year} />)}
+                {movieList.map((item: any) => <MovieCard key={Math.random() as number} title={item.Title} pic={item.Poster} year={item.Year} />)}
             </div>
         )
     }

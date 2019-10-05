@@ -6,6 +6,9 @@ import Button from '@material-ui/core/Button';
 import HomePage from "./components/HomePage/Index"
 import MoviesPage from "./components/MoviesPage/index"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from "react-redux"
+import store from "./redux/store"
+import Movie from "./components/Movie"
 
 
 
@@ -19,25 +22,28 @@ class App extends React.Component<any, any>{
 
 
   render() {
+    console.log(store.getState())
     return (
-      <Router>
-        <div>
-          <nav style={{ backgroundColor: "red", padding: "20px"}}>
-            <Link to="/" style={{margin: "10px"}}><Button variant="contained" >Home</Button></Link>
-            <Link to="/movies"><Button variant="contained" >Movies</Button></Link>
-          </nav>
-          <Container maxWidth="md" style={{ backgroundColor: "lightblue", padding: "0px" }}>
-            <Switch>
-              <Route path="/movies">
-                <MoviesPage />
-              </Route>
-              <Route path="/">
-                <HomePage />
-              </Route>
-            </Switch>
-          </Container>
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <div>
+            <nav style={{ backgroundColor: "red", padding: "20px" }}>
+              <Link to="/" style={{ margin: "10px" }}><Button variant="contained" >Home</Button></Link>
+              <Link to="/movies"><Button variant="contained" >Movies</Button></Link>
+              {/* <Link to="/movie"><Button variant="contained" >Movie</Button></Link> */}
+            </nav>
+            <Container maxWidth="md" style={{ backgroundColor: "lightblue", padding: "0px" }}>
+              <Switch>
+                <Route path="/movies" component={MoviesPage} />
+                <Route path="/movie/:code" component={Movie} />
+                <Route path="/" component={HomePage} />
+                <Route path="**" component={() => <h1> Not Found! </h1>} />
+              </Switch>
+            </Container>
+          </div>
+        </Router>
+      </Provider>
+
     );
   }
 }
