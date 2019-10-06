@@ -23,11 +23,11 @@ export default class MovieCard extends React.Component<any, any>{
             <div className="card" style={width}>
                 <Link to={`/movie/${linkTitle}`}>
                     <img src={source} style={width} />
+                    <div className="card-body">
+                        <h6 className="card-title">{title}</h6>
+                        <p className="card-text">{year}</p>
+                    </div>
                 </Link >
-                <div className="card-body">
-                    <h6 className="card-title">{title}</h6>
-                    <p className="card-text">{year}</p>
-                </div>
             </div >
 
         )

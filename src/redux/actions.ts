@@ -6,3 +6,10 @@ export const saveUserAction = (user: any) => {
         payload: { user }
     }
 }
+
+export const saveNewComment = (comments: any) => {
+    return {
+        type: Actions.SAVE_COMMENT,
+        payload: { comments }
+    }
+}
