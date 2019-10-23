@@ -1,8 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import pic1 from "../../assets/pics/no_poster.jpg"
-import { Link } from "react-router-dom"
-// import Movie from "../Movie/index"
+import {  Link } from "react-router-dom";
+import Button from '@material-ui/core/Button';
 
 
 
@@ -21,15 +21,13 @@ export default class MovieCard extends React.Component<any, any>{
         const linkTitle = title.toLowerCase()
         return (
             <div className="card" style={width}>
-                <Link to={`/movie/${linkTitle}`}>
-                    <img src={source} style={width} />
-                    <div className="card-body">
-                        <h6 className="card-title">{title}</h6>
-                        <p className="card-text">{year}</p>
-                    </div>
-                </Link >
+                <img src={source} style={width} />
+                <div className="card-body">
+                    <h6 className="card-title">{title}</h6>
+                    <p className="card-text">{year}</p>
+                    <Link to={`/movie/${linkTitle}`}><Button variant="contained" >More Info</Button></Link >
+                </div>
             </div >
-
         )
     }
 }

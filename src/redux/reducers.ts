@@ -3,7 +3,8 @@ import Actions from "./actions.config"
 const initialState = {
     user: null,
     anotherKey: "test",
-    comments: ""
+    comments: "",
+    favoritesList: []
 }
 
 
@@ -24,6 +25,15 @@ export default function root(state = initialState, action: any) {
             return{
                 ...state,
                 comments:  action.payload.comments 
+            }
+        }
+        case Actions.ADD_MOVIE_TO_FAVORITE: {
+            const {favoritesList} = state
+            const { movie } = action.payload
+            console.log( movie )
+            return{
+                ...state,
+                favoritesList:  [...favoritesList, movie]
             }
         }
         default: {

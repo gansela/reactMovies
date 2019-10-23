@@ -26,7 +26,7 @@ class LeaveComment extends React.Component<any, any>{
         const { movie, comment } = this.state
 
         return (
-            <div style={{ position: "relative", margin: "20px", left: "20%" }}>
+            <div style={{ position: "relative", margin: "20px", left: "0%" }}>
 
                 <TextareaAutosize aria-label="minimum height" style={{width: "40%" ,margin: "15px", verticalAlign:"top" }} rows={3} placeholder="wtite your comment" onChange={(e) => {
                     this.commentOperation(e.target.value)

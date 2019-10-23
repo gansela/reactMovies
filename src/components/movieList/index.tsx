@@ -25,10 +25,10 @@ export default class MovieList extends React.Component<any, any>{
 
     getApiResults = (searched: string): void => {
         axios.get(`http://www.omdbapi.com/?s=${searched}&type=movie&apikey=1fa83abf`)
-        .then(res => {
-            let movies = res.data;
-            this.setState({ movieList: movies.Search, searchFieldChange: false });
-        })
+            .then(res => {
+                let movies = res.data;
+                this.setState({ movieList: movies.Search, searchFieldChange: false });
+            })
     }
 
     render() {
@@ -40,7 +40,7 @@ export default class MovieList extends React.Component<any, any>{
         if (!movieList) return (<h1>NO Reasults</h1>)
         return (
             <div>
-                {movieList.map((item: any) => <MovieCard key={Math.random() as number} title={item.Title} pic={item.Poster} year={item.Year} />)}
+                {movieList.map((item: any, index: number) => <MovieCard key={index} title={item.Title} pic={item.Poster} year={item.Year} />)}
             </div>
         )
     }

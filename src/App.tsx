@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from "react-dom"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './App.css';
 import Container from '@material-ui/core/Container';
@@ -11,6 +10,7 @@ import { Provider } from "react-redux"
 import store from "./redux/store"
 import Movie from "./components/Movie"
 import Comments from "./components/Comments/index"
+import Favorites from "./components/Favorites/index"
 
 
 
@@ -33,13 +33,14 @@ class App extends React.Component<any, any>{
               <Link to="/" style={{ margin: "10px" }}><Button variant="contained" >Home</Button></Link>
               <Link to="/movies"><Button variant="contained" >Movies</Button></Link>
               <Link to="/comments" style={{ margin: "10px" }}><Button variant="contained" >Comments</Button></Link>
-              {/* <Link to="/movie"><Button variant="contained" >Movie</Button></Link> */}
+              <Link to="/favorites"><Button variant="contained" >favorites</Button></Link>
             </nav>
             <Container maxWidth="md" style={{ backgroundColor: "lightblue", padding: "0px" }}>
               <Switch>
                 <Route path="/movies" component={MoviesPage} />
                 <Route path="/comments" component={Comments} />
                 <Route path="/movie/:code" component={Movie} />
+                <Route path="/favorites" component={Favorites} />
                 <Route path="/" component={HomePage} />
                 <Route path="**" component={() => <h1> Not Found! </h1>} />
               </Switch>
